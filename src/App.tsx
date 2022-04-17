@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { ChatsZone } from './Components/ChatsZone/ChatsZone';
 import { Chat } from './Components/Chat/Chat';
 import { Route, Routes } from 'react-router-dom';
-import { IMessages } from './Interfaces/messages';
 import { users } from './Interfaces/users';
 
 const App:React.FC = () => {

@@ -4,7 +4,6 @@ import icon from "../../Assets/profileIcon.png"
 import { HeaderChat } from "./HeaderChat/HeaderChat";
 import { users } from "../../Interfaces/users";
 import { Message } from "./Message/Message";
-import { IMessages } from "../../Interfaces/messages";
 
 interface ChatProps{
   photo: string

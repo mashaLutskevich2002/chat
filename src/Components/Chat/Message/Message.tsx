@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Moment from "react-moment";
-import { IMessages } from "../../../Interfaces/messages";
 
 interface MessageProps{
     userInfo:any[]

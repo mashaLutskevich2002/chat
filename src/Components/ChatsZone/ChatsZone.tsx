@@ -3,7 +3,6 @@ import { NavLink, Route, Routes } from "react-router-dom";
 import { users } from "../../Interfaces/users";
 import { ChatsZoneHeader } from "./ChartsZoneHeader/ChatsZoneHeader";
 import { User } from "./User/User";
-import { IMessages } from "../../Interfaces/messages";
 
 
 interface ChatsZoneProps{
