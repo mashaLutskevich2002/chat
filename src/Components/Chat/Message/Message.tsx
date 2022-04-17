@@ -9,8 +9,6 @@ interface MessageProps{
 }
 
 export const Message:React.FC<MessageProps> = (props) =>{
-    
-
     return(
        <>  
             {props.userInfo.map((m)=>{
@@ -24,6 +22,5 @@ export const Message:React.FC<MessageProps> = (props) =>{
                 )   
             })}
         </>
-    
     )
 }
