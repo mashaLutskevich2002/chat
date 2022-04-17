@@ -1,10 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import './App.css';
 import { useState } from 'react';
 import { ChatsZone } from './Components/ChatsZone/ChatsZone';
 import { Chat } from './Components/Chat/Chat';
 import { Route, Routes } from 'react-router-dom';
 import { users } from './Interfaces/users';
+import { createContext } from 'react';
+import { IMessageContext} from './Context/context';
+
+
 
 const App:React.FC = () => {
   const [photo, setPhoto] = useState('');
@@ -12,11 +16,15 @@ const App:React.FC = () => {
   const [randomMessage, setRandomMessage] = useState<string>('')
   const [messageValue, setMessageValue] = useState('') //для будущего возможно
 
-  const handlerMessageValue = (message: string, ) => {
+    const message: IMessageContext = {
+      id: users.map((m)=> m.messageInfo)
+    };
+    console.log(message);
 
+
+  const handlerMessageValue = (message: string, ) => {
     usersInfo.map((m)=>m.messageInfo.message.push(message))
     console.log(usersInfo);
-    
   }
 
   const getMessage = async () => {
@@ -46,12 +54,14 @@ const App:React.FC = () => {
   }
 
   return (
+    // <MessageContext.Provider value={message}>
     <div className="App" >
       <ChatsZone addPhoto={addPhoto}  usersInfo={usersInfo}  />
       <Routes>  
         <Route path='/:id/:name' element={<Chat photo={photo} userInfo={usersInfo} messageValue={messageValue}  handlerMessageValue={handlerMessageValue} randomMessage={randomMessage}/>} />
       </Routes>
     </div>
+    //  </MessageContext.Provider>
   );
 }
 

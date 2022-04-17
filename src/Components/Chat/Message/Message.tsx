@@ -17,19 +17,19 @@ export const Message:React.FC<MessageProps> = (props) =>{
             {props.userInfo.map((m)=>{
                 return(
                 <div className="message" key={m.id}>
-                    <p className="message_m">
-                        { m.id == id.id 
-                            ? m.messageInfo.message[m.messageInfo.message.length - 1]
-                            : null
-                        }
-                       
-                    </p>
-                    <p className="message_d">
-                        {  m.id == id.id 
-                        ? <Moment format={'YYYY/MM/DD, HH:mm'} date={m.messageInfo.date[m.messageInfo.date.length-1]}/>
-                         :    null   
-                        }
-                       </p>
+                        
+                        {
+                            m.messageInfo.message.map((item:any)=>{
+                               if( m.id == id.id ){
+                                   return (
+                                       <>
+                                        <p>{item}</p>
+                                        <Moment format={'YYYY/MM/DD, HH:mm'} date={m.messageInfo.date}/>
+                                       </>
+                                   )
+                               }      
+                        })
+                        }  
                 </div>
                 )   
             })}
