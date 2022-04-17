@@ -21,7 +21,8 @@ export const ChatsZone: React.FC<ChatsZoneProps> = (props) =>{
                    props.usersInfo.map((user)=>{
                             return(
                                 <NavLink to={"/" + user.id + '/' + user.name}>
-                                    <User id={user.id} name={user.name} photo={user.photo} messages={user.messageInfo.message[user.messageInfo.message.length - 1]} date={user.messageInfo.date[user.messageInfo.date.length - 1]}  addPhoto={props.addPhoto}/>
+                                    <User id={user.id} name={user.name} photo={user.photo} messages={user.messageInfo.message[user.messageInfo.message.length - 1]}
+                                     date={user.messageInfo.date[user.messageInfo.date.length - 1]}  addPhoto={props.addPhoto} />
                                 </NavLink> 
                             )
                         })

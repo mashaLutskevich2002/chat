@@ -1,7 +1,7 @@
 export const users = [
     {
         id: 0,
-        name: 'Alice Freeman',
+        name: 'Alice Freeman1',
         photo: 'https://p.favim.com/orig/2018/07/27/profile-pic-girl-makeup-Favim.com-6081815.jpg',
         messageInfo:{
             date: [Date.now()],

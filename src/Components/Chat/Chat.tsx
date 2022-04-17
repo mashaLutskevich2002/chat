@@ -4,6 +4,7 @@ import icon from "../../Assets/profileIcon.png"
 import { HeaderChat } from "./HeaderChat/HeaderChat";
 import { users } from "../../Interfaces/users";
 import { Message } from "./Message/Message";
+import { useParams } from "react-router-dom";
 
 interface ChatProps{
   photo: string
@@ -21,7 +22,7 @@ export const Chat: React.FC<ChatProps> = (props) =>{
   }
 
   const pressBut = () => {
-    props.handlerMessageValue(message)
+    props.handlerMessageValue(message,)
   }
 
   return(

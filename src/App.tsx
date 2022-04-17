@@ -10,10 +10,13 @@ const App:React.FC = () => {
   const [photo, setPhoto] = useState('');
   const [usersInfo, setUsersInfo] = useState(users)
   const [randomMessage, setRandomMessage] = useState<string>('')
-  const [messageValue, setMessageValue] = useState('')
+  const [messageValue, setMessageValue] = useState('') //для будущего возможно
 
-  const handlerMessageValue = (message: string ) => {
-    users.map((m)=>m.messageInfo.message.push(message))
+  const handlerMessageValue = (message: string, ) => {
+
+    usersInfo.map((m)=>m.messageInfo.message.push(message))
+    console.log(usersInfo);
+    
   }
 
   const getMessage = async () => {
@@ -44,7 +47,7 @@ const App:React.FC = () => {
 
   return (
     <div className="App" >
-      <ChatsZone addPhoto={addPhoto}  usersInfo={usersInfo}/>
+      <ChatsZone addPhoto={addPhoto}  usersInfo={usersInfo}  />
       <Routes>  
         <Route path='/:id/:name' element={<Chat photo={photo} userInfo={usersInfo} messageValue={messageValue}  handlerMessageValue={handlerMessageValue} randomMessage={randomMessage}/>} />
       </Routes>
