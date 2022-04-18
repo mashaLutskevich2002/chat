@@ -1,14 +1,13 @@
 import React from "react";
 import { NavLink, Route, Routes } from "react-router-dom";
-import { users } from "../../Interfaces/users";
+import { users } from "../../Data/users";
 import { ChatsZoneHeader } from "./ChartsZoneHeader/ChatsZoneHeader";
 import { User } from "./User/User";
 
 
 interface ChatsZoneProps{
     addPhoto(photo:string):void
-    // messageValue: string[][]
-    usersInfo: any[]
+    messageValue:any
 }
 
 export const ChatsZone: React.FC<ChatsZoneProps> = (props) =>{
@@ -18,11 +17,12 @@ export const ChatsZone: React.FC<ChatsZoneProps> = (props) =>{
             <ChatsZoneHeader/>
             <p className="chats-zone__p">Chats</p>
                {
-                   props.usersInfo.map((user)=>{
+                   users.map((user) => {
+
                             return(
                                 <NavLink to={"/" + user.id + '/' + user.name}>
-                                    <User id={user.id} name={user.name} photo={user.photo} messages={user.messageInfo.message[user.messageInfo.message.length - 1]}
-                                     date={user.messageInfo.date}  addPhoto={props.addPhoto} />
+                                    <User id={user.id} name={user.name} photo={user.photo}
+                                    addPhoto={props.addPhoto} messageValue={props.messageValue} />
                                 </NavLink> 
                             )
                         })

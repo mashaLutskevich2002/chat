@@ -3,34 +3,30 @@ import Moment from "react-moment";
 import { useParams } from "react-router-dom";
 
 interface MessageProps{
-    userInfo:any[]
     randomMessage:string
-    messageValue:string
+    messageValue: any
 }
 
 export const Message:React.FC<MessageProps> = (props) =>{
     const id = useParams()
-    console.log(id.id)
-    
+  
     return(
-       <>  
-            {props.userInfo.map((m)=>{
+        <>  
+            {props.messageValue.map((m:any)=>{
                 return(
-                <div className="message" key={m.id}>
-                        
+                    <div className="message" key={m.id}>
                         {
-                            m.messageInfo.message.map((item:any)=>{
-                               if( m.id == id.id ){
-                                   return (
-                                       <>
-                                        <p>{item}</p>
-                                        <Moment format={'YYYY/MM/DD, HH:mm'} date={m.messageInfo.date}/>
-                                       </>
-                                   )
-                               }      
-                        })
-                        }  
-                </div>
+                            m.id ==id.id &&
+                            m.messages.map((i:any)=>{
+                                return (
+                                    <>
+                                    <p>{i.text}</p>
+                                    <Moment format={'YYYY/MM/DD, HH:mm'} date={i.date}/>
+                                    </>
+                                )
+                            }) 
+                        }
+                    </div>
                 )   
             })}
         </>
