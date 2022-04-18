@@ -8,7 +8,6 @@ import { useParams } from "react-router-dom";
 interface ChatProps{
   photo: string
   handlerMessageValue(messageValue: string, id:number|string|undefined ):void
-  randomMessage:string
   messageValue: any
 }
 
@@ -27,7 +26,7 @@ export const Chat: React.FC<ChatProps> = (props) =>{
   return(
       <div className="chat">
         <HeaderChat photo={props.photo} />
-        <Message randomMessage={props.randomMessage} messageValue={props.messageValue}/>
+        <Message messageValue={props.messageValue}/>
 
         <div className="chat__sendMessage">
           <input className="chat__inputText" type='text' value={message} placeholder='send message' onChange={(e)=>handlerChange(e)}/>

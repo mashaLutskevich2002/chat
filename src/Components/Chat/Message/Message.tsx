@@ -3,7 +3,6 @@ import Moment from "react-moment";
 import { useParams } from "react-router-dom";
 
 interface MessageProps{
-    randomMessage:string
     messageValue: any
 }
 

@@ -8,24 +8,38 @@ import { messagesFile} from './Data/messages';
 
 const App:React.FC = () => {
   const [photo, setPhoto] = useState('');
-  const [randomMessage, setRandomMessage] = useState<string>('')
   const [messageValue, setMessageValue] = useState(messagesFile)
+  const [isMessageSend, setIsMessageSend] = useState(false)
+  const params= useParams()
+
+  useEffect(() => {
+    localStorage.setItem('message', JSON.stringify(messageValue))
+  },[])
 
   //click for send button and create a new object (message)
   const handlerMessageValue = (message: string, id: string|undefined) => {  
+
     messageValue.filter((item:any) =>{ 
       if(item.id == id) {
         item.messages.push({
           text: message,
           date: new Date()
         })
-      }else{
-        return null
       }
     })
-  
+    
     localStorage.setItem('message', JSON.stringify(messageValue))
+    setIsMessageSend(true)
+    randomMes(id)
+  
   }
+
+
+  useEffect(() => {
+    const saveMessage = JSON.parse(localStorage.getItem('message') || '[]') 
+    setMessageValue(saveMessage)
+    setIsMessageSend(true)
+  },[messageValue,isMessageSend])
 
   //get random message
   const getMessage = async () => {
@@ -37,14 +51,26 @@ const App:React.FC = () => {
     }
   }
 
-  useEffect(() => {
-    const saveMessage = JSON.parse(localStorage.getItem('message') || '[]') 
-    setMessageValue(saveMessage)
-  },[messageValue])
+  const randomMes = (id:any) => {
+    if(isMessageSend== true){
+     return getMessage().then(r => {
+        setTimeout(() => {
+          messageValue.filter((item:any)=>{
+            if(item.id == id){
+              item.messages.push({
+                 text: r.value,
+                 date: new Date()
+               })
+              localStorage.setItem('message', JSON.stringify(messageValue))
+             }
+           })
+           },2000)
+         
+       })
 
-  useEffect(()=>{
-    getMessage().then(r => setRandomMessage(r.value)) 
-  },[])
+    }
+    return setIsMessageSend(false)
+  }
   
   const addPhoto= (photo:string)=> {
     setPhoto(photo)
@@ -54,7 +80,7 @@ const App:React.FC = () => {
     <div className="App" >
       <ChatsZone addPhoto={addPhoto} messageValue={messageValue} />
       <Routes>  
-        <Route path='/:id/:name' element={<Chat photo={photo} messageValue={messageValue}  handlerMessageValue={handlerMessageValue} randomMessage={randomMessage}/>} />
+        <Route path='/:id/:name' element={<Chat photo={photo} messageValue={messageValue}  handlerMessageValue={handlerMessageValue} />} />
       </Routes>
     </div>
   
