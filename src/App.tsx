@@ -10,14 +10,15 @@ const App:React.FC = () => {
   const [photo, setPhoto] = useState('');
   const [messageValue, setMessageValue] = useState(messagesFile)
   const [isMessageSend, setIsMessageSend] = useState(false)
-  const params= useParams()
 
   useEffect(() => {
-    localStorage.setItem('message', JSON.stringify(messageValue))
+    if(localStorage.getItem("message") == null){
+      localStorage.setItem('message', JSON.stringify(messageValue))
+    }   
   },[])
 
   //click for send button and create a new object (message)
-  const handlerMessageValue = (message: string, id: string|undefined) => {  
+  const handlerMessageValue = (message: string, id: string|undefined, name:string|undefined) => {  
 
     messageValue.filter((item:any) =>{ 
       if(item.id == id) {
@@ -29,9 +30,7 @@ const App:React.FC = () => {
     })
     
     localStorage.setItem('message', JSON.stringify(messageValue))
-    setIsMessageSend(true)
-    randomMes(id)
-  
+    randomMes(id, name)
   }
 
 
@@ -39,7 +38,7 @@ const App:React.FC = () => {
     const saveMessage = JSON.parse(localStorage.getItem('message') || '[]') 
     setMessageValue(saveMessage)
     setIsMessageSend(true)
-  },[messageValue,isMessageSend])
+  },[messageValue])
 
   //get random message
   const getMessage = async () => {
@@ -51,7 +50,7 @@ const App:React.FC = () => {
     }
   }
 
-  const randomMes = (id:any) => {
+  const randomMes = (id:any, name:string|undefined) => {
     if(isMessageSend== true){
      return getMessage().then(r => {
         setTimeout(() => {
@@ -62,6 +61,7 @@ const App:React.FC = () => {
                  date: new Date()
                })
               localStorage.setItem('message', JSON.stringify(messageValue))
+              alert(`${name} send you a message` )
              }
            })
            },2000)
@@ -80,7 +80,7 @@ const App:React.FC = () => {
     <div className="App" >
       <ChatsZone addPhoto={addPhoto} messageValue={messageValue} />
       <Routes>  
-        <Route path='/:id/:name' element={<Chat photo={photo} messageValue={messageValue}  handlerMessageValue={handlerMessageValue} />} />
+        <Route path='/:id/:name' element={<Chat photo={photo} messageValue={messageValue} isMessageSend={isMessageSend}  handlerMessageValue={handlerMessageValue} />} />
       </Routes>
     </div>
   

@@ -29,8 +29,8 @@ export const User:React.FC<UserProps> = (props) =>{
                                 if(lastElement !== undefined){
                                     return (
                                         <>
-                                            <p>{lastElement.text}</p>
-                                            <Moment format={'YYYY/MM/DD, HH:mm'} date={lastElement.date}/>
+                                            <p >{lastElement.text}</p>
+                                            <Moment className="users__d" format={'YYYY/MM/DD, HH:mm'} date={lastElement.date}/>
                                         </>
                                     )
                                 }else{
